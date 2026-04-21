@@ -1,0 +1,87 @@
+import streamlit as st
+import time
+from PIL import Image
+
+# 1. KONFIGURASI HALAMAN
+st.set_page_config(page_title="Perpisahan Angkatan 6", page_icon="🎓", layout="centered")
+
+# 2. FUNGSI EFEK KETIKAN
+def ketik_pelan_st(teks, jeda=0.03):
+    placeholder = st.empty()
+    isi = ""
+    for karakter in teks:
+        isi += karakter
+        placeholder.markdown(f"<div style='font-size:18px; line-height:1.6; text-align: justify;'>{isi}</div>", unsafe_allow_html=True)
+        time.sleep(jeda)
+    st.markdown("---")
+
+# 3. TAMPILAN UTAMA
+def main():
+    # Judul Besar
+    st.title("🎓 Jejak Langkah & Air Mata: Pamitnya Angkatan 6")
+    st.subheader("Sebuah surat terbuka untuk tempat yang kami sebut rumah.")
+    st.divider()
+
+    # --- BAGIAN GALERI FOTO (GRID 2x2) ---
+    st.subheader("📸 Galeri Kenangan Supercamp")
+    
+    # Baris Pertama
+    col1, col2 = st.columns(2)
+    with col1:
+        try:
+            img1 = Image.open("circle.jpg")
+            st.image(img1, caption="Solidaritas Angkatan 6", use_container_width=True)
+        except: st.warning("circle.jpg tidak ditemukan")
+        
+    with col2:
+        try:
+            img2 = Image.open("jatimpark.jpg")
+            st.image(img2, caption="Momen Seru Jatim Park 1", use_container_width=True)
+        except: st.warning("jatimpark.jpg tidak ditemukan")
+
+    # Baris Kedua
+    col3, col4 = st.columns(2)
+    with col3:
+        try:
+            img3 = Image.open("wisuda.jpg")
+            st.image(img3, caption="The Grand Taman Safari", use_container_width=True)
+        except: st.warning("wisuda.jpg tidak ditemukan")
+        
+    with col4:
+        try:
+            img4 = Image.open("museum.jpg")
+            st.image(img4, caption="Interactive Living Museum", use_container_width=True)
+        except: st.warning("museum.jpg tidak ditemukan")
+
+    st.info("💡 Scroll ke bawah untuk membaca pesan kami...")
+    st.divider()
+
+    # --- BAGIAN TEKS PERPISAHAN PANJANG ---
+    if st.button("Klik untuk Membaca Pesan Perpisahan"):
+        konten = [
+            "**Assalamualaikum Warahmatullahi Wabarakatuh.**\n\nSelamat pagi, siang, dan malam untuk kita semua. Kepada Bapak dan Ibu guru yang kami muliakan, serta teman-teman seperjuangan Angkatan 6 yang luar biasa.",
+            
+            "Rasanya baru kemarin kita berdiri di lapangan ini dengan seragam yang masih sangat kaku dan hati yang penuh rasa cemas. Kita datang membawa mimpi masing-masing, namun takdir mempertemukan kita di sini untuk merajut cerita sebagai Angkatan 6.",
+            
+            "Di sekolah ini, kita tidak hanya belajar tentang rumus atau teori. Kita belajar tentang arti solidaritas saat tugas menumpuk, arti kesabaran saat ujian, dan arti tawa saat jam kosong tiba. Foto-foto di atas adalah saksi bisu betapa bahagianya kita pernah berjuang bersama.",
+            
+            "Namun, kami sadar bahwa langkah kami tidak selalu lurus. Ada kalanya lisan kami melukai hati Bapak dan Ibu guru. Ada kalanya tingkah laku kami mengecewakan. Di detik-detik terakhir ini, izinkan kami, Angkatan 6, memohon maaf yang sedalam-dalamnya atas segala khilaf kami.",
+            
+            "Kepada Bapak dan Ibu Guru... terima kasih telah menjadi pelita. Jasa kalian akan terukir abadi dalam karakter yang kalian bentuk. Untuk teman-teman... jangan lupakan hari ini. Meski jalur kita berbeda setelah ini, ikatan Angkatan 6 tidak akan pernah putus oleh jarak.",
+            
+            "Perpisahan bukanlah akhir. Perpisahan adalah pintu menuju babak baru. Kami pamit untuk membuktikan bahwa didikan sekolah ini tidaklah sia-sia.",
+            
+            "\"Perpisahan hanya untuk mereka yang mencintai dengan mata. Bagi yang mencintai dengan hati, tidak ada yang namanya perpisahan.\"",
+            
+            "Terima kasih untuk segalanya. Maafkan kami atas segalanya. Kami, Angkatan 6, pamit undur diri untuk terbang lebih tinggi.\n\n**Wassalamualaikum Warahmatullahi Wabarakatuh.**"
+        ]
+
+        for paragraf in konten:
+            ketik_pelan_st(paragraf)
+            time.sleep(0.8)
+
+        st.balloons()
+        st.success("✨ Angkatan 6 - Selamanya Keluarga ✨")
+
+if __name__ == "__main__":
+    main()
